@@ -3,15 +3,15 @@ var orientdb = new Meteor.LiveOrientDB({
   host: 'localhost',
   port: '2424',
   username: 'root',
-  password: '235711',
-  database: 'play'
+  password: '123456',
+  database: 'players'
 });
 
 
 
 Meteor.publish('test', function(){
   return orientdb.select(
-    'select * from play', {params:{table:"play"}}
+    'select * from player', {params:{table:"player"}}
   );
 });
 
@@ -52,10 +52,10 @@ Meteor.publish('playerScore', function(name){
 
 Meteor.methods({
   'incScore': function(){
-      orientdb.execute('INSERT into play set name=:name, score=:score', {params:{name:'abc', score:100}});
+      orientdb.execute('INSERT into player set name=:name, score=:score', {params:{name:'abc', score:100}});
     },
   'delScore': function(){
-      orientdb.execute('DELETE vertex from play where name=:name', {params:{name:'abc'}});
+      orientdb.execute('DELETE vertex from player where name=:name', {params:{name:'abc'}});
     },
 
   'updScore': function(options){
